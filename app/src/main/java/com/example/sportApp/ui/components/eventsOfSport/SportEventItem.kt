@@ -2,10 +2,7 @@ package com.example.sportApp.ui.components.eventsOfSport
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,8 +34,7 @@ import com.example.sportApp.utils.replaceDashWithSpace
 fun SportEventItem(
     sportEvent: EventDomain,
     currentTime: Long,
-    onFavoriteAction: (String, Boolean) -> Unit,
-
+    onFavoriteAction: (String, Boolean) -> Unit
     ) {
     val remainingTime = sportEvent.startTime * 1000L - currentTime
     val matchTimeFormatted = remainingTime.formatTime()

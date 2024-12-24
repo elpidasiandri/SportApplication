@@ -52,7 +52,9 @@ fun App(
                     )
                     SportUiAndEventsContainer(
                         state.data[index],
-                        getCurrentTime = {0L},
+                        getCurrentTime = {
+                            state.currentTimer
+                        },
                         onFavoriteAction= { id, flag->
                             vm.handleEvent(
                                 SportEvents.IsMyFavourite(

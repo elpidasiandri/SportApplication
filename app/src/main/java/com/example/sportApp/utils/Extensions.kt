@@ -53,12 +53,17 @@ import kotlinx.coroutines.flow.*
                 }
             }
     }
-
 fun Long.formatTime(): String {
-    val totalSeconds = this / 1000
-    val hours = totalSeconds / 3600
-    val minutes = (totalSeconds % 3600) / 60
-    val seconds = totalSeconds % 60
+    if (this < 0) {
+        val endTime = -this
+        val hours = endTime / 3600000
+        val minutes = (endTime % 3600000) / 60000
+        val seconds = (endTime % 60000) / 1000
+        return "Event has been over ${String.format("%02d:%02d:%02d", hours, minutes, seconds)}"
+    }
+    val hours = this / 3600000
+    val minutes = (this % 3600000) / 60000
+    val seconds = (this % 60000) / 1000
     return String.format("%02d:%02d:%02d", hours, minutes, seconds)
 }
 fun String.replaceDashWithSpace(): String {

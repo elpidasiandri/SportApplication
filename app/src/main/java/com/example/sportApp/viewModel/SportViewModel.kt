@@ -1,6 +1,5 @@
 package com.example.sportApp.viewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sportApp.useCases.db.UpdateFavouriteSportUseCase
@@ -15,10 +14,10 @@ import com.example.sportApp.useCases.db.InsertSportsWithEventsUseCase
 import com.example.sportApp.useCases.network.GetNetworkSportsUseCase
 import com.example.sportApp.utils.catchAndHandleError
 import com.example.sportApp.utils.toSportDomain
+import com.example.sportApp.viewModel.stateAndEvents.EventJobForUpdateFavourite
 import com.example.sportApp.viewModel.stateAndEvents.SportEvents
 import com.example.sportApp.viewModel.stateAndEvents.SportUiState
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,8 +37,7 @@ class SportViewModel(
     private val updateFavouriteSport: UpdateFavouriteSportUseCase,
     private val deleteDataFromDb: DeleteDataFromDbUseCase,
 ) : ViewModel() {
-    private var updateMyFavouriteSportJob: Job? = null
-
+    private var updateMyFavouriteSportJob: EventJobForUpdateFavourite? = null
     private val _state = MutableStateFlow(SportUiState())
     val state: StateFlow<SportUiState>
         get() = _state
@@ -154,22 +152,44 @@ class SportViewModel(
                 }
 
                 is SportEvents.IsMyFavourite -> {
-                    updateMyFavouriteSportJob?.cancel()
-                    updateMyFavouriteSportJob =
-                        viewModelScope.launch(ioDispatcher) {
-                            flow {
-                                delay(400)
-                                emit(updateFavouriteSport(event.flag, event.eventId))
-                            }.catch {
-                            }.collectLatest {
-                            }
+                    viewModelScope.launch(ioDispatcher) {
+                        flow {
+                            delay(400)
+                            emit(updateFavouriteSport(event.flag, event.eventId))
+                        }.catch { exception ->
+                            showError(R.string.something_went_wrong)
+                        }.collectLatest { result ->
                         }
+                    }
+
+//                    if (updateMyFavouriteSportJob?.eventId != event.eventId) {
+//                        updateMyFavouriteSportJob?.job?.cancel()
+//
+//                        val newJob = viewModelScope.launch(ioDispatcher) {
+//                            flow {
+//                                delay(400)
+//                                emit(updateFavouriteSport(event.flag, event.eventId))
+//                            }.catch { exception ->
+//                                showError(R.string.something_went_wrong)
+//                            }.collectLatest { result ->
+//                            }
+//                        }
+//
+//                        updateMyFavouriteSportJob = EventJobForUpdateFavourite(event.eventId, newJob)
+//                    }
                 }
 
                 else -> Unit
             }
         }
     }
+     fun setTimer(timer:Long){
+         _state.update {
+             it.copy(
+                currentTimer = timer
+             )
+         }
+     }
 
     private fun showError(messageInt: Int) {
         _state.update {

@@ -13,8 +13,6 @@ import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : ComponentActivity() {
-    private val viewModel: SportViewModel by viewModel()
-
     @OptIn(KoinExperimentalAPI::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
