@@ -20,5 +20,3 @@ sealed class SportEvents{
     data object IsEmpty : SportEvents()
     data class IsMyFavourite(val eventId: String, val flag:Boolean) : SportEvents()
 }
-
-data class EventJobForUpdateFavourite(val eventId: String, val job: Job)
