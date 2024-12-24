@@ -10,7 +10,6 @@ interface ISportDatabaseRepo {
         sports: List<SportEntity>,
         events: List<SportEventEntity>,
     )
-
     suspend fun getLocallySportsAndEvents(): Flow<List<SportsWithEvents>>
     suspend fun deleteAll()
     suspend fun isMyFavourite(isMyFavourite:Boolean, eventId:String)

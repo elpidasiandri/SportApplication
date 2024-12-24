@@ -1,9 +1,6 @@
 package com.example.sportApp.viewModel
 
-import android.os.CountDownTimer
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sportApp.useCases.db.UpdateFavouriteSportUseCase
@@ -12,6 +9,7 @@ import com.example.sportApp.db.entities.SportEntity
 import com.example.sportApp.db.entities.SportEventEntity
 import com.example.sportApp.manager.PreferencesManager
 import com.example.sportApp.models.domain.SportDomain
+import com.example.sportApp.useCases.db.DeleteDataFromDbUseCase
 import com.example.sportApp.useCases.db.GetLocallySportsAndEventsUseCase
 import com.example.sportApp.useCases.db.InsertSportsWithEventsUseCase
 import com.example.sportApp.useCases.network.GetNetworkSportsUseCase
@@ -38,6 +36,7 @@ class SportViewModel(
     private val getNetworkSports: GetNetworkSportsUseCase,
     private val preferencesManager: PreferencesManager,
     private val updateFavouriteSport: UpdateFavouriteSportUseCase,
+    private val deleteDataFromDb: DeleteDataFromDbUseCase,
 ) : ViewModel() {
     private var updateMyFavouriteSportJob: Job? = null
 
@@ -90,20 +89,49 @@ class SportViewModel(
                             }
 
                         }
-                        flow {
-                            emit(
-                                insertSportsWithEvents(
-                                    sports = sports,
-                                    events = events
-                                )
-                            )
-                        }.catch {
-                            showError(R.string.something_went_wrong)
-                        }.collectLatest {
-                            preferencesManager.setLastUpdatedTimestamp(System.currentTimeMillis())
-                        }
+                        deleteDataFromDbAndInsertNewData(sports, events)
                     }
             }
+        }
+    }
+
+    private suspend fun deleteDataFromDbAndInsertNewData(
+        sports: List<SportEntity>,
+        events: List<SportEventEntity>,
+    ) {
+        flow { emit(deleteDataFromDb()) }.catch {
+
+        }.collectLatest {
+            flow {
+                emit(
+                    insertSportsWithEvents(
+                        sports = sports,
+                        events = events
+                    )
+                )
+            }.catch {
+                showError(R.string.something_went_wrong)
+            }.collectLatest {
+                _state.update {
+                    it.copy(
+                        didRefresh = false
+                    )
+                }
+                preferencesManager.setLastUpdatedTimestamp(System.currentTimeMillis())
+            }
+        }
+    }
+
+    private fun refresh() {
+        _state.update {
+            it.copy(
+                isRefreshing = true,
+                didRefresh = true,
+                events = SportEvents.None
+            )
+        }
+        viewModelScope.launch {
+            getSportFromNetwork()
         }
     }
 
@@ -123,10 +151,6 @@ class SportViewModel(
             when (event) {
                 is SportEvents.Refreshing -> {
                     refresh()
-                }
-
-                is SportEvents.Error -> {
-                    showError(R.string.no_internet_connection)
                 }
 
                 is SportEvents.IsMyFavourite -> {
@@ -152,32 +176,23 @@ class SportViewModel(
             it.copy(
                 showToast = true,
                 messageError = messageInt,
-                isRefreshing = false
+                isRefreshing = false,
+                data = emptyList(),
             )
-        }
-    }
-
-    fun refresh() {
-        _state.update {
-            it.copy(
-                isRefreshing = true,
-                events = SportEvents.None
-            )
-        }
-        viewModelScope.launch {
-            getSportFromNetwork()
         }
     }
 
     private fun updateData(data: List<SportDomain>) {
-        _state.update {
-            it.copy(
-                events = if (data.isEmpty()) SportEvents.IsEmpty else SportEvents.None,
-                data = data,
-                isRefreshing = false,
-                messageError = null,
-                showToast = false
-            )
+        if (!state.value.didRefresh){
+            _state.update {
+                it.copy(
+                    events = if (data.isEmpty()) SportEvents.IsEmpty else SportEvents.None,
+                    data = data,
+                    isRefreshing = false,
+                    messageError = null,
+                    showToast = false,
+                )
+            }
         }
     }
 }

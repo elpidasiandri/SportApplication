@@ -15,7 +15,6 @@ class SportDatabaseRepoImpl(
         sports: List<SportEntity>,
         events: List<SportEventEntity>,
     ) {
-        if (sports.isNotEmpty()) deleteAll()
         sportDao.insertSports(sports)
         sportEventsDao.insertEvents(events)
     }

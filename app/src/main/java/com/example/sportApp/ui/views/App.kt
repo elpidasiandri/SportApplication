@@ -42,7 +42,7 @@ fun App(
             .pullRefresh(refresherState)
     ) {
         if (state.data.isEmpty() && !state.isRefreshing){
-            EmptyScreenOfSports(refresh = {vm.refresh()})
+            EmptyScreenOfSports(refresh = {vm.handleEvent(SportEvents.Refreshing)})
         }else{
             LazyColumn {
                 items(count = state.data.size) { index ->

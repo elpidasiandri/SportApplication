@@ -30,7 +30,7 @@ fun EmptyScreenOfSports(refresh: () -> Unit) {
     ) {
         Text(
             text = stringResource(id = R.string.no_sports),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyMedium.copy(color = white),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 

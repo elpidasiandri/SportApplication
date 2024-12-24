@@ -5,6 +5,7 @@ import com.example.sportApp.useCases.db.UpdateFavouriteSportUseCase
 import com.example.sportApp.db.SportDatabase
 import com.example.sportApp.repositories.database.ISportDatabaseRepo
 import com.example.sportApp.repositories.database.SportDatabaseRepoImpl
+import com.example.sportApp.useCases.db.DeleteDataFromDbUseCase
 import com.example.sportApp.useCases.db.GetLocallySportsAndEventsUseCase
 import com.example.sportApp.useCases.db.InsertSportsWithEventsUseCase
 import org.koin.android.ext.koin.androidContext
@@ -21,6 +22,7 @@ val sportDatabaseModule = module {
     single { get<SportDatabase>().sportsWithEventsDao() }
     single<ISportDatabaseRepo> { SportDatabaseRepoImpl(get(),get()) }
     single { GetLocallySportsAndEventsUseCase(get()) }
+    single { DeleteDataFromDbUseCase(get()) }
     single { UpdateFavouriteSportUseCase(get()) }
     single { InsertSportsWithEventsUseCase(get()) }
 }

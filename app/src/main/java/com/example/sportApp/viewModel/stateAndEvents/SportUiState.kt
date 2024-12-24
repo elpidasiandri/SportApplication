@@ -6,6 +6,7 @@ data class SportUiState(
     val events: SportEvents = SportEvents.None,
     val isRefreshing: Boolean = true,
     val isEmpty: Boolean = false,
+    val didRefresh: Boolean = false,
     val showToast: Boolean = false,
     val messageError: Int? = null,
     val data:List<SportDomain> = listOf()
@@ -15,6 +16,5 @@ sealed class SportEvents{
     data object Refreshing : SportEvents()
     data object None : SportEvents()
     data object IsEmpty : SportEvents()
-    data class Error(val message: Int) : SportEvents()
     data class IsMyFavourite(val eventId: String, val flag:Boolean) : SportEvents()
 }

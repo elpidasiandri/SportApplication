@@ -19,6 +19,7 @@ val sportModule = module {
             get(),
             get(),
             get(),
+            get(),
             get()
         )
     }
