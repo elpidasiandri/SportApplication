@@ -1,5 +1,11 @@
 package com.example.sportApp.ui.components.eventsOfSport
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,15 +24,25 @@ fun SportEventsList(
     getCurrentTime: () -> Long,
     onFavoriteAction: (String, Boolean) -> Unit,
 ) {
-    if (isMyFavourites) {
+    AnimatedVisibility(
+        visible = isMyFavourites,
+        enter = fadeIn(animationSpec = tween(durationMillis = 150)) + slideInVertically(
+            initialOffsetY = { it / 2 },
+            animationSpec = tween(durationMillis = 150)
+        ),
+        exit = fadeOut(animationSpec = tween(durationMillis = 100)) + slideOutVertically(
+            targetOffsetY = { it / 2 },
+            animationSpec = tween(durationMillis = 100)
+        )
+    ) {
         val favouriteItems = remember(eventsList) {
             eventsList.filter {
                 it.isFavourite
             }
         }
-        if (favouriteItems.isEmpty()){
+        if (favouriteItems.isEmpty()) {
             EmptyScreenOfEvents(isMyFavourites)
-        }else{
+        } else {
             ListOfEvents(
                 pageSize = pageSize,
                 eventsList = favouriteItems,
@@ -34,11 +50,21 @@ fun SportEventsList(
                 onFavoriteAction = onFavoriteAction
             )
         }
-
-    } else {
-        if (eventsList.isEmpty()){
+    }
+    AnimatedVisibility(
+        visible = !isMyFavourites,
+        enter = fadeIn(animationSpec = tween(durationMillis = 100)) + slideInVertically(
+            initialOffsetY = { it / 2 },
+            animationSpec = tween(durationMillis = 150)
+        ),
+        exit = fadeOut(animationSpec = tween(durationMillis = 150)) + slideOutVertically(
+            targetOffsetY = { it / 2 },
+            animationSpec = tween(durationMillis = 100)
+        )
+    ) {
+        if (eventsList.isEmpty()) {
             EmptyScreenOfEvents(isMyFavourites)
-        }else{
+        } else {
             ListOfEvents(
                 pageSize = pageSize,
                 eventsList = eventsList,
@@ -46,7 +72,6 @@ fun SportEventsList(
                 onFavoriteAction = onFavoriteAction
             )
         }
-
     }
 }
 
@@ -57,14 +82,14 @@ fun ListOfEvents(
     getCurrentTime: () -> Long,
     onFavoriteAction: (String, Boolean) -> Unit,
 ) {
-    val pages by remember(eventsList) {
+    val pages by remember(eventsList.size) {
         mutableIntStateOf(eventsList.size / pageSize)
     }
-    var currentPage by remember(eventsList) {
+    var currentPage by remember(eventsList.size) {
         mutableIntStateOf(0)
     }
 
-    val currentIndex by remember(currentPage, eventsList) {
+    val currentIndex by remember(currentPage, eventsList.size) {
         mutableIntStateOf(currentPage * pageSize)
     }
 

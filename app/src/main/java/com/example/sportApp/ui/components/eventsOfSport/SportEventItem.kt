@@ -24,11 +24,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.app.sportytimes.ui.theme.lightBlue
+import com.app.sportytimes.ui.theme.orange
 import com.app.sportytimes.ui.theme.white
 import com.example.sportApp.R
 import com.example.sportApp.models.domain.EventDomain
+import com.example.sportApp.ui.components.DynamicTextScalingColumn
 import com.example.sportApp.utils.formatTime
-import com.example.sportApp.utils.replaceDashWithSpace
 
 @Composable
 fun SportEventItem(
@@ -64,7 +65,7 @@ fun SportEventItem(
             Icon(
                 painter = painterResource(id = if (isFavourite) R.drawable.star_my_favourite else R.drawable.star_not_my_favourite),
                 contentDescription = if (isFavourite) "Delete from my favourites" else "Add to my favourites",
-                tint = if (isFavourite) Color.Yellow else Color.Gray
+                tint = if (isFavourite) orange else Color.Gray
             )
         }
     }
@@ -72,27 +73,7 @@ fun SportEventItem(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
-            text = sportEvent.eventName.replaceDashWithSpace(),
-            style = MaterialTheme.typography.bodySmall.copy(color = white)
-        )
-        Text(
-            text = "vs",
-            style = MaterialTheme.typography.bodyMedium.copy(color = white),
-            color = Color.Red
-        )
-        Text(
-            text = sportEvent.eventNameSecond.replaceDashWithSpace(),
-            style = MaterialTheme.typography.bodySmall.copy(color = white)
-        )
-
-        Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp),
-            color = white,
-            thickness = 1.dp
-        )
+        DynamicTextScalingColumn(sportEvent)
     }
 }
 

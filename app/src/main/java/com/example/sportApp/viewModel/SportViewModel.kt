@@ -98,7 +98,7 @@ class SportViewModel(
         events: List<SportEventEntity>,
     ) {
         flow { emit(deleteDataFromDb()) }.catch {
-
+            showError(R.string.something_went_wrong)
         }.collectLatest {
             flow {
                 emit(
