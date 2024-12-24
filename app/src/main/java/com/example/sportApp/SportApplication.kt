@@ -1,9 +1,9 @@
-package com.example.sportapp
+package com.example.sportApp
 
 import android.app.Application
-import com.example.sportapp.di.networkModule
-import com.example.sportapp.di.sportDatabaseModule
-import com.example.sportapp.di.sportModule
+import com.example.sportApp.di.networkModule
+import com.example.sportApp.di.sportDatabaseModule
+import com.example.sportApp.di.sportModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,7 +15,7 @@ class SportApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@SportApplication)
-            modules(networkModule, sportModule,sportDatabaseModule)
+            modules(networkModule, sportDatabaseModule, sportModule,)
         }
     }
 }

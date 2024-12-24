@@ -1,6 +1,6 @@
-package com.example.sportapp.network
+package com.example.sportApp.network
 
-import com.example.sportapp.models.network.SportDto
+import com.example.sportApp.models.network.SportDto
 import retrofit2.http.GET
 
 interface SportClient {

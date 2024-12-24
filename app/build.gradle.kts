@@ -5,11 +5,11 @@ plugins {
     id("io.github.takahirom.roborazzi")
 }
 android {
-    namespace = "com.example.sportapp"
+    namespace = "com.example.sportApp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.sportapp"
+        applicationId = "com.example.sportApp"
         minSdk = 21
         targetSdk = 35
         versionCode = 1

@@ -1,6 +1,6 @@
-package com.example.sportapp.models.network
+package com.example.sportApp.models.network
 
-import com.example.sportapp.models.domain.SportDomain
+import com.example.sportApp.models.domain.SportDomain
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

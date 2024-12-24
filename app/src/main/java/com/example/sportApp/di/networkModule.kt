@@ -1,7 +1,7 @@
-package com.example.sportapp.di
+package com.example.sportApp.di
 
-import com.example.sportapp.BuildConfig
-import com.example.sportapp.network.SportClient
+import com.example.sportApp.BuildConfig
+import com.example.sportApp.network.SportClient
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

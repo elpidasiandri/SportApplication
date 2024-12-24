@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Sport App</string>
+    <string name="vs">vs</string>
+    <string name="ok_got_it">OK got it</string>
+    <string name="please_contact_us_at_xx_afafa_com">Please contact us at xx@afafa.com</string>
+    <string name="we_are_sorry_something_went_wrong">We are sorry.Something went wrong, the data you see may be outdated</string>
+    <string name="refresh">Refresh</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="something_went_wrong">Something went wrong. Please try again.</string>
+    <string name="no_favorites">It seems you haven\'t any favorite events in %1$s</string>
+    <string name="it_seems_there_are_currently_no_events_for">It seems there are currently no events for %1$s</string>
+    <string name="no_favourites">Sorry, you haven\'t added any favourite events yet. Start discovering and saving your favourites!</string>
+    <string name="no_events">There are no available events at the moment. Please check back later for new events!</string>
+    <string name="no_sports">No Sports Available.</string>
 </resources>

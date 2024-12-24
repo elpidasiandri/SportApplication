@@ -1,11 +1,13 @@
-package com.example.sportapp.viewModel.stateAndEvents
+package com.example.sportApp.viewModel.stateAndEvents
 
-import com.example.sportapp.models.domain.SportDomain
+import com.example.sportApp.models.domain.SportDomain
 
 data class SportUiState(
     val events: SportEvents = SportEvents.None,
     val isRefreshing: Boolean = true,
     val isEmpty: Boolean = false,
+    val showToast: Boolean = false,
+    val messageError: Int? = null,
     val data:List<SportDomain> = listOf()
 )
 
@@ -14,4 +16,5 @@ sealed class SportEvents{
     data object None : SportEvents()
     data object IsEmpty : SportEvents()
     data class Error(val message: Int) : SportEvents()
+    data class IsMyFavourite(val eventId: String, val flag:Boolean) : SportEvents()
 }

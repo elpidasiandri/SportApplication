@@ -1,7 +1,7 @@
-package com.example.sportapp.repositories.network
+package com.example.sportApp.repositories.network
 
-import com.example.sportapp.network.SportClient
-import com.example.sportapp.models.network.SportDto
+import com.example.sportApp.network.SportClient
+import com.example.sportApp.models.network.SportDto
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

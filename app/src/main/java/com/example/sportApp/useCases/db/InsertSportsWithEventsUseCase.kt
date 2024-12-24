@@ -1,8 +1,8 @@
-package com.example.sportapp.useCases.db
+package com.example.sportApp.useCases.db
 
-import com.example.sportapp.db.entities.SportEntity
-import com.example.sportapp.db.entities.SportEventEntity
-import com.example.sportapp.repositories.database.ISportDatabaseRepo
+import com.example.sportApp.db.entities.SportEntity
+import com.example.sportApp.db.entities.SportEventEntity
+import com.example.sportApp.repositories.database.ISportDatabaseRepo
 
 class InsertSportsWithEventsUseCase(private val repo: ISportDatabaseRepo) {
     suspend operator fun invoke(

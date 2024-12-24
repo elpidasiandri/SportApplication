@@ -1,4 +1,4 @@
-package com.example.sportapp.db.entities
+package com.example.sportApp.db.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

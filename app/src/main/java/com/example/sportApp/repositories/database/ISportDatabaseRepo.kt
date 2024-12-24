@@ -1,8 +1,9 @@
-package com.example.sportapp.repositories.database
+package com.example.sportApp.repositories.database
 
-import com.example.sportapp.db.entities.SportEntity
-import com.example.sportapp.db.entities.SportEventEntity
-import com.example.sportapp.db.entities.SportsWithEvents
+import com.example.sportApp.db.entities.SportEntity
+import com.example.sportApp.db.entities.SportEventEntity
+import com.example.sportApp.db.entities.SportsWithEvents
+import kotlinx.coroutines.flow.Flow
 
 interface ISportDatabaseRepo {
     suspend fun setSportsAndEvents(
@@ -10,5 +11,7 @@ interface ISportDatabaseRepo {
         events: List<SportEventEntity>,
     )
 
-    suspend fun getLocallySportsAndEvents(): List<SportsWithEvents>
+    suspend fun getLocallySportsAndEvents(): Flow<List<SportsWithEvents>>
+    suspend fun deleteAll()
+    suspend fun isMyFavourite(isMyFavourite:Boolean, eventId:String)
 }
