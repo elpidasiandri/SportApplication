@@ -71,10 +71,10 @@ fun Long.formatTime(): String {
 }
 fun String.splitText(): Pair<String, String> {
     return try {
-        val  (part1,part2)  = this.split("-")
-        Pair(part1,part2)
+        val parts = this.split("-", limit = 2) // Split only once at the first hyphen
+        Pair(parts[0], parts.getOrElse(1) { parts[0] }) // If no second part, return the whole string
     } catch (e: Exception) {
-        Pair(this,this)
+        Pair(this, this)
     }
 }
 fun Modifier.noRippleClickable(
@@ -108,7 +108,7 @@ fun String.scaleTextToFitWidth(
     return with(density) { newFontSizePx.toSp() }
 }
 
-private fun measureTextWidth(density: Density, text: String, fontSize: TextUnit): Float {
+fun measureTextWidth(density: Density, text: String, fontSize: TextUnit): Float {
     val textPaint = android.graphics.Paint()
     textPaint.textSize = with(density) { fontSize.toPx() }
     return textPaint.measureText(text)

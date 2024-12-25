@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.sportApp.R
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.height
+import androidx.compose.ui.platform.testTag
 import com.app.sportytimes.ui.theme.red
 import com.app.sportytimes.ui.theme.white
 
@@ -66,12 +67,16 @@ fun SportRow(
             Button(
                 modifier = Modifier
                     .width(80.dp)
-                    .padding(end = 8.dp),
+                    .padding(end = 8.dp)
+                    .testTag("TestArrowButton"),
                 colors = ButtonDefaults.buttonColors(containerColor = white),
                 onClick = { arrowButtonAction(isOpenArrow) }) {
+                val resId = if (isOpenArrow) R.drawable.arrow_up else R.drawable.arrow_down
                 Image(
-                    painter = painterResource(id = if (isOpenArrow) R.drawable.arrow_up else R.drawable.arrow_down),
+                    painter = painterResource(id = resId),
+
                     contentDescription = "opened/closed arrow",
+                    modifier = Modifier.testTag(if (isOpenArrow) "arrow_up" else "arrow_down")
                 )
             }
         }
