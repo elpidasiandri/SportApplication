@@ -1,7 +1,6 @@
 package com.example.sportApp.viewModel.stateAndEvents
 
 import com.example.sportApp.models.domain.SportDomain
-import kotlinx.coroutines.Job
 
 data class SportUiState(
     val events: SportEvents = SportEvents.None,

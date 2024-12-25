@@ -135,7 +135,9 @@ class SportViewModel(
     private fun listenToLocalItems() {
         viewModelScope.launch {
             withContext(ioDispatcher) {
-                getLocallySports().catch {}
+                getLocallySports().catch {
+                    showError(R.string.something_went_wrong)
+                }
                     .collectLatest { locallyData ->
                         updateData(locallyData.toSportDomain())
                     }
