@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface SportClient {
     @GET("sports.json")
-    suspend fun getSports(): List<SportDto>
+    suspend fun getSports(): List<SportDto?>?
 }

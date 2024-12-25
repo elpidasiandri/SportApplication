@@ -3,8 +3,8 @@ package com.example.sportApp.di
 import androidx.room.Room
 import com.example.sportApp.useCases.db.UpdateFavouriteSportUseCase
 import com.example.sportApp.db.SportDatabase
-import com.example.sportApp.repositories.database.ISportDatabaseRepo
-import com.example.sportApp.repositories.database.SportDatabaseRepoImpl
+import com.example.sportApp.mock.database.ISportDatabaseRepo
+import com.example.sportApp.mock.database.SportDatabaseRepoImpl
 import com.example.sportApp.useCases.db.DeleteDataFromDbUseCase
 import com.example.sportApp.useCases.db.GetLocallySportsAndEventsUseCase
 import com.example.sportApp.useCases.db.InsertSportsWithEventsUseCase

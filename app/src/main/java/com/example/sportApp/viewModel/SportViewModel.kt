@@ -6,7 +6,7 @@ import com.example.sportApp.useCases.db.UpdateFavouriteSportUseCase
 import com.example.sportApp.R
 import com.example.sportApp.db.entities.SportEntity
 import com.example.sportApp.db.entities.SportEventEntity
-import com.example.sportApp.manager.PreferencesManager
+import com.example.sportApp.manager.IPreferencesManager
 import com.example.sportApp.models.domain.SportDomain
 import com.example.sportApp.useCases.db.DeleteDataFromDbUseCase
 import com.example.sportApp.useCases.db.GetLocallySportsAndEventsUseCase
@@ -33,7 +33,7 @@ class SportViewModel(
     private val getLocallySports: GetLocallySportsAndEventsUseCase,
     private val insertSportsWithEvents: InsertSportsWithEventsUseCase,
     private val getNetworkSports: GetNetworkSportsUseCase,
-    private val preferencesManager: PreferencesManager,
+    private val preferencesManager: IPreferencesManager,
     private val updateFavouriteSport: UpdateFavouriteSportUseCase,
     private val deleteDataFromDb: DeleteDataFromDbUseCase,
 ) : ViewModel() {
@@ -63,16 +63,16 @@ class SportViewModel(
                     }
                 }
                     .collectLatest { response ->
-                        val sports = response.map { sportDomain ->
+                        val sports = response?.map { sportDomain ->
                             SportEntity(
-                                sportId = sportDomain.sportId ?: "",
-                                sportName = sportDomain.sportName ?: ""
+                                sportId = sportDomain?.sportId ?: "",
+                                sportName = sportDomain?.sportName ?: ""
                             )
                         }
 
                         val events: MutableList<SportEventEntity> = mutableListOf()
-                        response.map { sport ->
-                            sport.sportEvent?.map { event ->
+                        response?.map { sport ->
+                            sport?.sportEvent?.map { event ->
                                 events.add(
                                     SportEventEntity(
                                         eventId = event.eventId ?: "",
@@ -86,7 +86,10 @@ class SportViewModel(
                             }
 
                         }
-                        deleteDataFromDbAndInsertNewData(sports, events)
+                        sports?.let {notNullSports->
+                            deleteDataFromDbAndInsertNewData(notNullSports, events)
+                        }
+
                     }
             }
         }

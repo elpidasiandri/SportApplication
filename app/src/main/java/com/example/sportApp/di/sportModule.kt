@@ -1,9 +1,10 @@
 package com.example.sportApp.di
 
-import com.example.sportApp.repositories.network.ISportNetworkRepo
-import com.example.sportApp.repositories.network.SportNetworkRepoImpl
+import com.example.sportApp.manager.IPreferencesManager
+import com.example.sportApp.mock.network.ISportNetworkRepo
+import com.example.sportApp.mock.network.SportNetworkRepoImpl
 import com.example.sportApp.useCases.network.GetNetworkSportsUseCase
-import com.example.sportApp.manager.PreferencesManager
+import com.example.sportApp.manager.PreferencesManagerImpl
 import com.example.sportApp.viewModel.SportViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +24,8 @@ val sportModule = module {
             get()
         )
     }
-    single { PreferencesManager(androidContext()) }
     single<CoroutineDispatcher> { Dispatchers.IO }
+    single<IPreferencesManager> { PreferencesManagerImpl(androidContext()) }
     single<ISportNetworkRepo> { SportNetworkRepoImpl(get()) }
     single { GetNetworkSportsUseCase(get()) }
 }
