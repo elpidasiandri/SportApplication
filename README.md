@@ -23,6 +23,7 @@
 
 >> sportApp
 ├── db
+> 
 │   ├── daos                # Data Access Objects (DAO) for interacting with Room database
 │   └── entities            # Room entities representing database tables
 ├── di                      # Modules for Dependency Injection (using Koin)
