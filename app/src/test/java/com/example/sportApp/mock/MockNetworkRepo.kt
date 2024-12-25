@@ -1,7 +1,7 @@
 package com.example.sportApp.mock
 
 import com.example.sportApp.models.network.SportDto
-import com.example.sportApp.mock.network.ISportNetworkRepo
+import com.example.sportApp.repositories.network.ISportNetworkRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

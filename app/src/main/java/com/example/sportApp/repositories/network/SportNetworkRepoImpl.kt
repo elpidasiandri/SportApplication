@@ -1,4 +1,4 @@
-package com.example.sportApp.mock.network
+package com.example.sportApp.repositories.network
 
 import com.example.sportApp.network.SportClient
 import com.example.sportApp.models.network.SportDto

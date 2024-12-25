@@ -1,8 +1,8 @@
 package com.example.sportApp.di
 
 import com.example.sportApp.manager.IPreferencesManager
-import com.example.sportApp.mock.network.ISportNetworkRepo
-import com.example.sportApp.mock.network.SportNetworkRepoImpl
+import com.example.sportApp.repositories.network.ISportNetworkRepo
+import com.example.sportApp.repositories.network.SportNetworkRepoImpl
 import com.example.sportApp.useCases.network.GetNetworkSportsUseCase
 import com.example.sportApp.manager.PreferencesManagerImpl
 import com.example.sportApp.viewModel.SportViewModel

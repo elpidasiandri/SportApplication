@@ -1,4 +1,4 @@
-package com.example.sportApp.mock.database
+package com.example.sportApp.repositories.database
 
 import com.example.sportApp.db.entities.SportEntity
 import com.example.sportApp.db.entities.SportEventEntity

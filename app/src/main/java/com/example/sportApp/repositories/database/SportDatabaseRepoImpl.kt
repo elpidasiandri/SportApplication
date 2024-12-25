@@ -1,4 +1,4 @@
-package com.example.sportApp.mock.database
+package com.example.sportApp.repositories.database
 
 import com.example.sportApp.db.daos.SportsDao
 import com.example.sportApp.db.daos.SportsEventsDao

@@ -3,7 +3,7 @@ package com.example.sportApp.mock
 import com.example.sportApp.db.entities.SportEntity
 import com.example.sportApp.db.entities.SportEventEntity
 import com.example.sportApp.db.entities.SportsWithEvents
-import com.example.sportApp.mock.database.ISportDatabaseRepo
+import com.example.sportApp.repositories.database.ISportDatabaseRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
