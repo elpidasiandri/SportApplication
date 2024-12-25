@@ -22,53 +22,30 @@
 ## Schema
 
 >> sportApp
-├── db
-> 
-│   ├── daos                # Data Access Objects (DAO) for interacting with Room database
 
-│   └── entities            # Room entities representing database tables
-
-├── di                      # Modules for Dependency Injection (using Koin)
-
-├── manager                 # SharedPreferences (stores the time for HTTP call after one day)
-
-├── models
-
-│   ├── domain              # Domain models
-
-│   └── network             # Network models (used for API responses)
-
-├── network                 # API service (Retrofit setup)
-
-├── repositories
-
-│   ├── database            # Repository for interacting with Room
-
-│   └── network             # Repository for interacting with network data
-
-├── theme                   # App themes (colors, typography, etc.)
-
-├── ui
-
-│   ├── components          # Reusable UI components
-
-│   ├── emptyScreens        # Empty state screens when no data is available
-
-│   ├── errorToast          # Custom Toast for showing error messages
-
-│   ├── eventsOfSport       # UI representation of sports events
-
-│   └── sportRow            # Single row view for displaying a sport event
-
-├── useCases
-
-│   ├── db                  # Use case for Room database operations
-
-│   └── network             # Use case for network operations
-
-├── utils                   # extensions
-
-└── viewModel               # ViewModel
-
-    └── stateAndEvents      # Contains the state and events logic for the ViewModels
+* db
+    * daos             # Data Access Objects (DAO) for interacting with Room database
+    * entities         # Room entities representing database tables
+* di                   # Modules for Dependency Injection (using Koin)
+* preferences              # SharedPreferences (stores the time for HTTP call after one day)
+* models
+    * domain           # Domain models
+    * network          # Network models (used for API responses)
+* network              # API service (Retrofit setup)
+* repositories
+    * database         # Repository for interacting with Room
+    * network          # Repository for interacting with network data
+* theme                # App themes (colors, typography, etc.)
+* ui
+    * components       # Reusable UI components
+    * emptyScreens     # Empty state screens when no data is available
+    * errorToast       # Custom Toast for showing error messages
+    * eventsOfSport    # UI representation of sports events
+      *sportRow          # Single row view for displaying a sport event
+* useCases
+    * db               # Use case for Room database operations
+    * network          # Use case for network operations
+* utils                # extensions
+* viewModel            # ViewModel
+    *  stateAndEvents  # Contains the state and events logic for the ViewModels
 

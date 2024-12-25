@@ -6,7 +6,7 @@ import com.example.sportApp.useCases.db.UpdateFavouriteSportUseCase
 import com.example.sportApp.R
 import com.example.sportApp.db.entities.SportEntity
 import com.example.sportApp.db.entities.SportEventEntity
-import com.example.sportApp.manager.IPreferencesManager
+import com.example.sportApp.preferences.IPreferencesManager
 import com.example.sportApp.models.domain.SportDomain
 import com.example.sportApp.useCases.db.DeleteDataFromDbUseCase
 import com.example.sportApp.useCases.db.GetLocallySportsAndEventsUseCase

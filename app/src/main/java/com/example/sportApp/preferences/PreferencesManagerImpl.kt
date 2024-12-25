@@ -1,4 +1,4 @@
-package com.example.sportApp.manager
+package com.example.sportApp.preferences
 
 import android.content.Context
 import android.content.SharedPreferences

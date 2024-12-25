@@ -1,4 +1,4 @@
-package com.example.sportApp.manager
+package com.example.sportApp.preferences
 
 interface IPreferencesManager {
     fun setLastUpdatedTimestamp(timestamp: Long)

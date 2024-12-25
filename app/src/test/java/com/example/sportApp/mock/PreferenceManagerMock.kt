@@ -1,6 +1,6 @@
 package com.example.sportApp.mock
 
-import com.example.sportApp.manager.IPreferencesManager
+import com.example.sportApp.preferences.IPreferencesManager
 
 class PreferenceManagerMock: IPreferencesManager {
     override fun setLastUpdatedTimestamp(timestamp: Long) {
